@@ -507,7 +507,7 @@
 
     <div id="authContainer">
         <div class="auth-card">
-            <img src="logo1.png" class="auth-logo" alt="Logo">
+            <img src="logo1.png" alt="Dr Bharat Chougule" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 15px;">
             <div class="auth-title">Neuro Specialities</div>
             <div class="auth-subtitle">Secure Cloud System Access</div>
             
@@ -684,6 +684,278 @@
                                     <button id="mic-provDiagnosis" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'provDiagnosis')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
                                 </div>
                             </div>
+
+                            <div id="section-patient-generals" style="margin-bottom: 25px; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e5e7eb;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; cursor:pointer;" onclick="toggleGeneralsSection()">
+        <div style="display:flex; align-items:center; gap: 10px;">
+            <input type="checkbox" id="includeGeneralsInPrint" class="notes-checkbox" title="Check to print Generals" checked onclick="event.stopPropagation()">
+            <label for="includeGeneralsInPrint" class="notes-label" onclick="event.stopPropagation()">Patient Generals</label>
+        </div>
+        <span id="generalsToggleIcon" style="font-weight:bold; color:var(--primary); font-size:1.2em;">▼</span>
+    </div>
+    
+    <div id="generalsContentBody" style="display:none;">
+        
+        <div class="form-group">
+            <label>Chief Complaints</label>
+            <div class="mic-wrapper">
+                <textarea id="genChiefComplaints" class="auto-expand" rows="3" placeholder="Enter chief complaints..."></textarea>
+                <button id="mic-genChiefComplaints" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'genChiefComplaints')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div class="form-group">
+                <label>Thermals</label>
+                <div class="form-check-group">
+                    <label class="form-check-label"><input type="checkbox" class="chk-therm" id="therm-hot" onclick="handleExclusiveCheckbox(this, 'chk-therm')"> Hot</label>
+                    <label class="form-check-label"><input type="checkbox" class="chk-therm" id="therm-cold" onclick="handleExclusiveCheckbox(this, 'chk-therm')"> Cold</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Thirst</label>
+                <div class="form-check-group">
+                    <label class="form-check-label"><input type="checkbox" class="chk-thirst" id="thirst-thirsty" onclick="handleExclusiveCheckbox(this, 'chk-thirst')"> Thirsty</label>
+                    <label class="form-check-label"><input type="checkbox" class="chk-thirst" id="thirst-thirstless" onclick="handleExclusiveCheckbox(this, 'chk-thirst')"> Thirstless</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Appetite</label>
+                <div class="form-check-group">
+                    <label class="form-check-label"><input type="checkbox" class="chk-appetite" id="app-normal" onclick="handleExclusiveCheckbox(this, 'chk-appetite')"> Normal</label>
+                    <label class="form-check-label"><input type="checkbox" class="chk-appetite" id="app-increased" onclick="handleExclusiveCheckbox(this, 'chk-appetite')"> Increased</label>
+                    <label class="form-check-label"><input type="checkbox" class="chk-appetite" id="app-decreased" onclick="handleExclusiveCheckbox(this, 'chk-appetite')"> Decreased</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Desires</label>
+                <div class="form-check-group" style="gap: 15px;">
+                    <label class="form-check-label"><input type="checkbox" id="des-sweet"> Sweet</label>
+                    <label class="form-check-label"><input type="checkbox" id="des-salt"> Salt</label>
+                    <label class="form-check-label"><input type="checkbox" id="des-sour"> Sour</label>
+                    <label class="form-check-label"><input type="checkbox" id="des-spicy"> Spicy</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Aversions</label>
+                <div class="mic-wrapper">
+                    <textarea id="genAversions" class="auto-expand" rows="4"></textarea>
+                    <button id="mic-genAversions" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'genAversions')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Sleep Quality</label>
+                <div class="form-check-group">
+                    <label class="form-check-label"><input type="checkbox" class="chk-sleep" id="sleep-good" onclick="handleExclusiveCheckbox(this, 'chk-sleep')"> Good</label>
+                    <label class="form-check-label"><input type="checkbox" class="chk-sleep" id="sleep-disturbed" onclick="handleExclusiveCheckbox(this, 'chk-sleep')"> Disturbed</label>
+                    <label class="form-check-label"><input type="checkbox" class="chk-sleep" id="sleep-insomnia" onclick="handleExclusiveCheckbox(this, 'chk-sleep')"> Insomnia</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Dreams</label>
+                <div class="mic-wrapper">
+                    <input type="text" id="genDreams" list="dream-suggestions" placeholder="Type or select dreams...">
+                    <button id="mic-genDreams" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'genDreams')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
+                </div>
+                <datalist id="dream-suggestions">
+                    <option value="Falling"></option>
+                    <option value="Flying"></option>
+                    <option value="Being chased"></option>
+                    <option value="Water"></option>
+                    <option value="Dead relatives"></option>
+                </datalist>
+            </div>
+        </div>
+
+        <h5 style="border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 20px;">Mental Symptoms</h5>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Nature</label>
+                <div class="form-check-group">
+                    <label class="form-check-label"><input type="checkbox" id="ment-irritable"> Irritable</label>
+                    <label class="form-check-label"><input type="checkbox" id="ment-anxiety"> Anxiety</label>
+                    <label class="form-check-label"><input type="checkbox" id="ment-fearful"> Fearful</label>
+                    <label class="form-check-label"><input type="checkbox" id="ment-depression"> Depression</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Company</label>
+                <div class="form-check-group">
+                    <label class="form-check-label"><input type="checkbox" class="chk-company" id="comp-likes" onclick="handleExclusiveCheckbox(this, 'chk-company')"> Likes company</label>
+                    <label class="form-check-label"><input type="checkbox" class="chk-company" id="comp-solitude" onclick="handleExclusiveCheckbox(this, 'chk-company')"> Desire solitude</label>
+                </div>
+            </div>
+        </div>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Fears</label>
+                <div class="mic-wrapper">
+                    <textarea id="genFears" class="auto-expand" rows="4"></textarea>
+                    <button id="mic-genFears" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'genFears')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Stress Causes</label>
+                <div class="mic-wrapper">
+                    <textarea id="genStress" class="auto-expand" rows="4"></textarea>
+                    <button id="mic-genStress" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'genStress')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
+                </div>
+            </div>
+        </div>
+
+        <h5 style="border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 20px;">Physical Generals</h5>
+        <div class="grid-3">
+            <div class="form-group">
+                <label>Energy Level</label>
+                <div class="form-check-group">
+                    <label class="form-check-label"><input type="checkbox" class="chk-energy" id="energy-low" onclick="handleExclusiveCheckbox(this, 'chk-energy')"> Low</label>
+                    <label class="form-check-label"><input type="checkbox" class="chk-energy" id="energy-normal" onclick="handleExclusiveCheckbox(this, 'chk-energy')"> Normal</label>
+                    <label class="form-check-label"><input type="checkbox" class="chk-energy" id="energy-high" onclick="handleExclusiveCheckbox(this, 'chk-energy')"> High</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Sweating (Location + Odour)</label>
+                <div class="mic-wrapper">
+                    <input type="text" id="genSweating">
+                    <button id="mic-genSweating" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'genSweating')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Sensitivity</label>
+                <div class="form-check-group">
+                    <label class="form-check-label"><input type="checkbox" id="sens-cold"> Cold</label>
+                    <label class="form-check-label"><input type="checkbox" id="sens-heat"> Heat</label>
+                    <label class="form-check-label"><input type="checkbox" id="sens-noise"> Noise</label>
+                    <label class="form-check-label"><input type="checkbox" id="sens-light"> Light</label>
+                </div>
+            </div>
+        </div>
+
+        <h5 style="border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 20px;">System-wise Complaints</h5>
+        <div style="margin-bottom: 15px;">
+            <div class="nav-pills" style="justify-content: flex-start; margin-bottom: 10px; background: white; border: 1px solid #e5e7eb;">
+                <button type="button" class="nav-btn sys-tab active" onclick="switchSysTab(event, 'digestive')">Digestive</button>
+                <button type="button" class="nav-btn sys-tab" onclick="switchSysTab(event, 'respiratory')">Respiratory</button>
+                <button type="button" class="nav-btn sys-tab" onclick="switchSysTab(event, 'urinary')">Urinary</button>
+                <button type="button" class="nav-btn sys-tab" onclick="switchSysTab(event, 'musculo')">Musculoskeletal</button>
+            </div>
+            
+            <div id="sys-digestive" class="sys-content" style="display:block;">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Symptoms</label>
+                        <div class="mic-wrapper"><textarea id="sysDigSymp" class="auto-expand" rows="2"></textarea><button id="mic-sysDigSymp" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'sysDigSymp')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Modalities</label>
+                        <div class="mic-wrapper"><textarea id="sysDigMod" class="auto-expand" rows="2"></textarea><button id="mic-sysDigMod" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'sysDigMod')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button></div>
+                    </div>
+                </div>
+            </div>
+            <div id="sys-respiratory" class="sys-content" style="display:none;">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Symptoms</label>
+                        <div class="mic-wrapper"><textarea id="sysRespSymp" class="auto-expand" rows="2"></textarea><button id="mic-sysRespSymp" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'sysRespSymp')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Modalities</label>
+                        <div class="mic-wrapper"><textarea id="sysRespMod" class="auto-expand" rows="2"></textarea><button id="mic-sysRespMod" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'sysRespMod')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button></div>
+                    </div>
+                </div>
+            </div>
+            <div id="sys-urinary" class="sys-content" style="display:none;">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Symptoms</label>
+                        <div class="mic-wrapper"><textarea id="sysUriSymp" class="auto-expand" rows="2"></textarea><button id="mic-sysUriSymp" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'sysUriSymp')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Modalities</label>
+                        <div class="mic-wrapper"><textarea id="sysUriMod" class="auto-expand" rows="2"></textarea><button id="mic-sysUriMod" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'sysUriMod')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button></div>
+                    </div>
+                </div>
+            </div>
+            <div id="sys-musculo" class="sys-content" style="display:none;">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Symptoms</label>
+                        <div class="mic-wrapper"><textarea id="sysMuscSymp" class="auto-expand" rows="2"></textarea><button id="mic-sysMuscSymp" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'sysMuscSymp')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Modalities</label>
+                        <div class="mic-wrapper"><textarea id="sysMuscMod" class="auto-expand" rows="2"></textarea><button id="mic-sysMuscMod" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'sysMuscMod')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="female-section-group" style="display:none;">
+            <h5 style="border-bottom: 1px solid #ccc; padding-bottom: 5px; color:#d6336c; margin-top: 20px;">Female History</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>Menses History</label><div class="mic-wrapper"><textarea id="femMenses" class="auto-expand" rows="2"></textarea><button id="mic-femMenses" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'femMenses')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button></div></div>
+                <div class="form-group"><label>Pain</label><div class="mic-wrapper"><textarea id="femPain" class="auto-expand" rows="2"></textarea><button id="mic-femPain" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'femPain')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button></div></div>
+                <div class="form-group"><label>Leucorrhoea</label><div class="mic-wrapper"><textarea id="femLeuco" class="auto-expand" rows="2"></textarea><button id="mic-femLeuco" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'femLeuco')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button></div></div>
+                <div class="form-group"><label>Pregnancy History</label><div class="mic-wrapper"><textarea id="femPreg" class="auto-expand" rows="2"></textarea><button id="mic-femPreg" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'femPreg')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button></div></div>
+            </div>
+        </div>
+
+        <h5 style="border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 20px;">History</h5>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Past History</label>
+                <div class="mic-wrapper">
+                    <textarea id="histPast" class="auto-expand" rows="3" placeholder="Diseases, Surgeries, Medicines taken..."></textarea>
+                    <button id="mic-histPast" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'histPast')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Family History</label>
+                <div class="form-check-group" style="margin-bottom: 10px;">
+                    <label class="form-check-label"><input type="checkbox" id="fam-diabetes"> Diabetes</label>
+                    <label class="form-check-label"><input type="checkbox" id="fam-htn"> Hypertension</label>
+                    <label class="form-check-label"><input type="checkbox" id="fam-cancer"> Cancer</label>
+                    <label class="form-check-label"><input type="checkbox" id="fam-tb"> TB</label>
+                </div>
+                <div class="mic-wrapper">
+                    <textarea id="histFamOther" class="auto-expand" rows="2" placeholder="Other family history..."></textarea>
+                    <button id="mic-histFamOther" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'histFamOther')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Miasmatic Analysis</label>
+            <div class="form-check-group">
+                <label class="form-check-label"><input type="checkbox" id="mias-psora"> Psora</label>
+                <label class="form-check-label"><input type="checkbox" id="mias-sycosis"> Sycosis</label>
+                <label class="form-check-label"><input type="checkbox" id="mias-syphilis"> Syphilis</label>
+            </div>
+        </div>
+
+    </div>
+    <div style="margin-top: 25px; border-top: 2px dashed #cbd5e1; padding-top: 20px;">
+            <button type="button" class="btn btn-primary" onclick="analyzeSymptomsWithAI()" id="btnAnalyzeAI" style="width: 100%; font-size: 1.1em; padding: 12px;">
+            Suggest Medicines (AI)
+            </button>
+            
+            <div id="aiLoadingIndicator" style="display:none; text-align:center; padding:15px; color:#6b7280;">
+                <div class="spinner" style="width:35px; height:35px; border-width:4px; margin: 0 auto;"></div>
+                <p style="margin-top:10px; font-size:14px; font-weight:bold;">Processing clinical data...</p>
+            </div>
+            
+            <div id="aiSuggestionsBox" style="margin-top: 15px; display:none; background: #eff6ff; border: 2px solid #93c5fd; border-radius: 8px; padding: 15px;">
+                <h4 style="margin-top:0; color:var(--primary); font-size:16px; border-bottom: 1px solid #bfdbfe; padding-bottom: 5px;">AI Suggested Medicines</h4>
+                <div id="aiSuggestionsList" style="display:flex; flex-direction:column; gap:10px; margin-top: 10px;"></div>
+            </div>
+        </div>
+</div>
 
                             <div id="section-on-exam" style="margin-bottom: 25px; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e5e7eb;">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; cursor:pointer;" onclick="toggleExamSection()">
@@ -872,8 +1144,7 @@
         let sessionSpace = "";
         let currentWebkitText = "";
 
-        const KEEP_TEXT_MICS = ['provDiagnosis', 'docDetails', 'testECG', 'testEEG', 'testNCV', 'testDoppler', 'testCTMRI', 'testOldReports', 'regDiagnosis', 'regAddress'];
-
+const KEEP_TEXT_MICS = ['provDiagnosis', 'docDetails', 'testECG', 'testEEG', 'testNCV', 'testDoppler', 'testCTMRI', 'testOldReports', 'regDiagnosis', 'regAddress', 'genChiefComplaints', 'genAversions', 'genDreams', 'genFears', 'genStress', 'genSweating', 'sysDigSymp', 'sysDigMod', 'sysRespSymp', 'sysRespMod', 'sysUriSymp', 'sysUriMod', 'sysMuscSymp', 'sysMuscMod', 'femMenses', 'femPain', 'femLeuco', 'femPreg', 'histPast', 'histFamOther'];
         let currentTemplateAction = null;
 
         function showToast(msg, type='neutral') {
@@ -883,6 +1154,26 @@
             t.classList.add('show');
             setTimeout(() => { t.className = ''; }, 3000); 
         }
+
+        window.toggleGeneralsSection = function() {
+            const body = document.getElementById('generalsContentBody');
+            const icon = document.getElementById('generalsToggleIcon');
+            if (body.style.display === 'none') {
+                body.style.display = 'block';
+                icon.innerText = '▲';
+            } else {
+                body.style.display = 'none';
+                icon.innerText = '▼';
+            }
+        };
+
+        window.switchSysTab = function(event, tab) {
+            document.querySelectorAll('.sys-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.sys-tab').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById('sys-' + tab).style.display = 'block';
+            event.currentTarget.classList.add('active');
+        };
 
         window.adjustFontSize = function(delta) {
             const root = document.documentElement;
@@ -1084,8 +1375,7 @@
                 renderDiagTemplateChips(); renderDiagTemplateManagerList();
             });
             
-            ['reviewSearch', 'regName', 'regAddress', 'regDiagnosis', 'provDiagnosis', 'docDetails', 'examBP', 'examPulse', 'labHB', 'labRBS', 'labCreatinine', 'testECG', 'testEEG', 'testNCV', 'testDoppler', 'testCTMRI', 'testOldReports'].forEach(attachMicListeners);
-            
+['reviewSearch', 'regName', 'regAddress', 'regDiagnosis', 'provDiagnosis', 'docDetails', 'examBP', 'examPulse', 'labHB', 'labRBS', 'labCreatinine', 'testECG', 'testEEG', 'testNCV', 'testDoppler', 'testCTMRI', 'testOldReports', 'genChiefComplaints', 'genAversions', 'genDreams', 'genFears', 'genStress', 'genSweating', 'sysDigSymp', 'sysDigMod', 'sysRespSymp', 'sysRespMod', 'sysUriSymp', 'sysUriMod', 'sysMuscSymp', 'sysMuscMod', 'femMenses', 'femPain', 'femLeuco', 'femPreg', 'histPast', 'histFamOther'].forEach(attachMicListeners);            
             document.querySelectorAll('.auto-expand').forEach(el => {
                 el.addEventListener('input', function() {
                     this.style.height = 'auto';
@@ -1717,6 +2007,158 @@
                     </div>`;
             });
         }
+
+        window.analyzeSymptomsWithAI = async function() {
+            if (groqApiKeys.length === 0) {
+                showToast("Groq API Key missing in system settings!", "error");
+                return;
+            }
+
+            const btn = document.getElementById('btnAnalyzeAI');
+            const loader = document.getElementById('aiLoadingIndicator');
+            const box = document.getElementById('aiSuggestionsBox');
+            const list = document.getElementById('aiSuggestionsList');
+
+            btn.disabled = true;
+            loader.style.display = 'block';
+            box.style.display = 'none';
+
+            // 1. Gather ONLY Clinical Data (No PII)
+            let clinicalData = "";
+            const add = (lbl, val) => { if(val && val.trim() !== '') clinicalData += `${lbl}: ${val.trim()}\n`; };
+            const getChk = (sel) => Array.from(document.querySelectorAll(sel)).filter(el => el.checked).map(el => el.parentElement.textContent.trim()).join(', ');
+
+            add("Personal Docs", document.getElementById('docDetails')?.value);
+            add("Provisional Diagnosis", document.getElementById('provDiagnosis')?.value);
+            add("Vitals", `BP: ${document.getElementById('examBP')?.value || '-'}, Pulse: ${document.getElementById('examPulse')?.value || '-'}`);
+            
+            add("Chief Complaints", document.getElementById('genChiefComplaints')?.value);
+            add("Thermals/Thirst/Appetite", [getChk('.chk-therm'), getChk('.chk-thirst'), getChk('.chk-appetite')].filter(Boolean).join(' | '));
+            add("Desires", getChk('#des-sweet, #des-salt, #des-sour, #des-spicy'));
+            add("Aversions", document.getElementById('genAversions')?.value);
+            add("Sleep", getChk('.chk-sleep'));
+            add("Dreams", document.getElementById('genDreams')?.value);
+            add("Mind/Nature", getChk('#ment-irritable, #ment-anxiety, #ment-fearful, #ment-depression'));
+            add("Company", getChk('.chk-company'));
+            add("Fears", document.getElementById('genFears')?.value);
+            add("Stress", document.getElementById('genStress')?.value);
+            add("Energy", getChk('.chk-energy'));
+            
+            add("Digestive", document.getElementById('sysDigSymp')?.value);
+            add("Respiratory", document.getElementById('sysRespSymp')?.value);
+            add("Urinary", document.getElementById('sysUriSymp')?.value);
+            add("Musculoskeletal", document.getElementById('sysMuscSymp')?.value);
+            add("Past History", document.getElementById('histPast')?.value);
+
+            if (!clinicalData.trim()) {
+                showToast("No clinical data entered to analyze!", "error");
+                btn.disabled = false; loader.style.display = 'none';
+                return;
+            }
+
+            // 2. Call Groq Text API with Error Catching & Fallbacks
+            let rawText = null;
+            let lastError = "";
+            
+            let prompt = `You are an expert physician and homeopath. Analyze the following patient symptoms/data and suggest 3 to 5 highly relevant medicines. Return ONLY a valid JSON array of objects. Format strictly like this: [{"name": "MedicineName", "type": "TAB" | "SYP" | "CAP" | "DROP" | "OINTMENT", "strength": "e.g. 500mg or 200CH"}]. Do not include any other text, markdown formatting, or explanations.\n\nClinical Data:\n${clinicalData}`;
+
+            for (let key of groqApiKeys) {
+                try {
+                    let res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                        method: "POST",
+                        headers: { 
+                            "Authorization": `Bearer ${key.trim()}`, // .trim() removes accidental spaces
+                            "Content-Type": "application/json" 
+                        },
+                        body: JSON.stringify({
+                            model: "llama-3.1-8b-instant", // Updated to Groq's most reliable fast model
+                            messages: [{ role: "user", content: prompt }],
+                            temperature: 0.2
+                        })
+                    });
+
+                    if (!res.ok) {
+                        let errorText = await res.text();
+                        console.error(`🚨 Groq API Error (Status ${res.status}):`, errorText);
+                        lastError = `Status ${res.status}: ${errorText}`;
+                        continue; // Try the next API key if you have multiples
+                    }
+                    
+                    let data = await res.json();
+                    rawText = data.choices[0].message.content.trim();
+                    break; // Success! Break out of the loop
+                } catch(e) {
+                    console.error("Network/Parsing Error:", e);
+                    lastError = e.message;
+                }
+            }
+
+            // 3. Process AI Response
+            try {
+                if (!rawText) throw new Error("No response from Groq. Last Error: " + lastError);
+                
+                // Cleanup AI markdown output just in case
+                if (rawText.startsWith("```json")) rawText = rawText.replace(/```json/g, "").replace(/```/g, "").trim();
+                if (rawText.startsWith("```")) rawText = rawText.replace(/```/g, "").trim();
+
+                let suggestions = JSON.parse(rawText);
+
+                // Render the UI Box
+                list.innerHTML = "";
+                suggestions.forEach(med => {
+                    let div = document.createElement('div');
+                    div.style = "display:flex; justify-content:space-between; align-items:center; background:white; padding:12px; border-radius:6px; border:1px solid #bfdbfe; box-shadow: 0 1px 3px rgba(0,0,0,0.05);";
+                    div.innerHTML = `
+                        <div>
+                            <strong style="color:#1e3a8a; font-size:16px;">${med.name}</strong>
+                            <span style="font-size:12px; font-weight:bold; background:#e5e7eb; color:#374151; padding:3px 8px; border-radius:4px; margin-left:10px;">${med.type || 'TAB'}</span>
+                            <span style="font-size:13px; font-weight:bold; color:#b91c1c; margin-left:8px;">${med.strength || ''}</span>
+                        </div>
+                        <button class="btn btn-green btn-sm" style="padding: 6px 12px; font-size: 14px;" onclick="addSuggestedMedicine('${(med.name||'').replace(/'/g,"\\'")}', '${(med.type||'TAB').replace(/'/g,"\\'")}', '${(med.strength||'').replace(/'/g,"\\'")}')">+ Add</button>
+                    `;
+                    list.appendChild(div);
+                });
+
+                box.style.display = 'block';
+            } catch (e) {
+                console.error("Failed to parse AI response:", e, "\nRaw AI Text:", rawText);
+                showToast("Failed to process AI suggestions. Check console.", "error");
+            } finally {
+                btn.disabled = false;
+                loader.style.display = 'none';
+            }
+        };
+
+        // 4. Function to automatically fill the prescription row
+        window.addSuggestedMedicine = function(name, type, strength) {
+            addDrugRow(); // Create a new row
+            const rid = rowCount; // get the new row ID
+            
+            // Fill Name
+            document.getElementById(`name-${rid}`).value = name;
+            
+            // Fill Type
+            if (type) {
+                const tLower = type.toLowerCase();
+                const typeEl = document.getElementById(`type-${tLower}-${rid}`);
+                if (typeEl) {
+                    typeEl.checked = true;
+                    handleTypeCheck(rid, tLower);
+                } else {
+                    // If AI suggests something like "DROP", create custom type
+                    document.getElementById(`custom-type-input-${rid}`).value = type.toUpperCase();
+                    addCustomType(rid);
+                }
+            }
+            
+            // Fill Strength
+            if (strength) {
+                toggleStrengthMode(rid, 'manual');
+                document.getElementById(`str-input-${rid}`).value = strength;
+            }
+            
+            showToast(`Added ${name} to prescription!`, "success");
+        };
         
 function populateDatalist() { 
             const dl = document.getElementById('allMedicines'); 
@@ -2071,9 +2513,7 @@ function populateDatalist() {
 
                 const typeEl = document.querySelector(`input[id^="type-"][id$="-${rid}"]:checked`);
                 let type = '';
-                if(typeEl) {
-                    type = typeEl.parentElement.textContent.trim().toUpperCase();
-                }
+                if(typeEl) type = typeEl.parentElement.textContent.trim().toUpperCase();
                 
                 const sel = document.getElementById(`str-select-${rid}`);
                 const inp = document.getElementById(`str-input-${rid}`);
@@ -2093,9 +2533,67 @@ function populateDatalist() {
                 });
             }
 
+            // Gather Patient Generals Data
+            const generals = {
+                chiefComplaints: document.getElementById('genChiefComplaints')?.value || '',
+                thermHot: document.getElementById('therm-hot')?.checked || false,
+                thermCold: document.getElementById('therm-cold')?.checked || false,
+                thirstThirsty: document.getElementById('thirst-thirsty')?.checked || false,
+                thirstThirstless: document.getElementById('thirst-thirstless')?.checked || false,
+                appNormal: document.getElementById('app-normal')?.checked || false,
+                appInc: document.getElementById('app-increased')?.checked || false,
+                appDec: document.getElementById('app-decreased')?.checked || false,
+                desSweet: document.getElementById('des-sweet')?.checked || false,
+                desSalt: document.getElementById('des-salt')?.checked || false,
+                desSour: document.getElementById('des-sour')?.checked || false,
+                desSpicy: document.getElementById('des-spicy')?.checked || false,
+                aversions: document.getElementById('genAversions')?.value || '',
+                sleepGood: document.getElementById('sleep-good')?.checked || false,
+                sleepDisturbed: document.getElementById('sleep-disturbed')?.checked || false,
+                sleepInsomnia: document.getElementById('sleep-insomnia')?.checked || false,
+                dreams: document.getElementById('genDreams')?.value || '',
+                mentIrr: document.getElementById('ment-irritable')?.checked || false,
+                mentAnx: document.getElementById('ment-anxiety')?.checked || false,
+                mentFear: document.getElementById('ment-fearful')?.checked || false,
+                mentDep: document.getElementById('ment-depression')?.checked || false,
+                compLikes: document.getElementById('comp-likes')?.checked || false,
+                compSolitude: document.getElementById('comp-solitude')?.checked || false,
+                fears: document.getElementById('genFears')?.value || '',
+                stress: document.getElementById('genStress')?.value || '',
+                energyLow: document.getElementById('energy-low')?.checked || false,
+                energyNorm: document.getElementById('energy-normal')?.checked || false,
+                energyHigh: document.getElementById('energy-high')?.checked || false,
+                sweating: document.getElementById('genSweating')?.value || '',
+                sensCold: document.getElementById('sens-cold')?.checked || false,
+                sensHeat: document.getElementById('sens-heat')?.checked || false,
+                sensNoise: document.getElementById('sens-noise')?.checked || false,
+                sensLight: document.getElementById('sens-light')?.checked || false,
+                sysDigSymp: document.getElementById('sysDigSymp')?.value || '',
+                sysDigMod: document.getElementById('sysDigMod')?.value || '',
+                sysRespSymp: document.getElementById('sysRespSymp')?.value || '',
+                sysRespMod: document.getElementById('sysRespMod')?.value || '',
+                sysUriSymp: document.getElementById('sysUriSymp')?.value || '',
+                sysUriMod: document.getElementById('sysUriMod')?.value || '',
+                sysMuscSymp: document.getElementById('sysMuscSymp')?.value || '',
+                sysMuscMod: document.getElementById('sysMuscMod')?.value || '',
+                femMenses: document.getElementById('femMenses')?.value || '',
+                femPain: document.getElementById('femPain')?.value || '',
+                femLeuco: document.getElementById('femLeuco')?.value || '',
+                femPreg: document.getElementById('femPreg')?.value || '',
+                histPast: document.getElementById('histPast')?.value || '',
+                famDiab: document.getElementById('fam-diabetes')?.checked || false,
+                famHtn: document.getElementById('fam-htn')?.checked || false,
+                famCancer: document.getElementById('fam-cancer')?.checked || false,
+                famTb: document.getElementById('fam-tb')?.checked || false,
+                histFamOther: document.getElementById('histFamOther')?.value || '',
+                miasPsora: document.getElementById('mias-psora')?.checked || false,
+                miasSycosis: document.getElementById('mias-sycosis')?.checked || false,
+                miasSyphilis: document.getElementById('mias-syphilis')?.checked || false
+            };
+
             try {
                 await updateDoc(doc(db, "patients", currentPatient.id), { 
-                    draft: { provDiagnosis, notes, labs, drugs }
+                    draft: { provDiagnosis, notes, labs, drugs, generals }
                 });
                 showToast("Draft Saved Successfully!", "success");
             } catch(e) {
@@ -2117,6 +2615,20 @@ function populateDatalist() {
                 const el = document.getElementById(id);
                 if(el) { el.value = ''; el.style.height = 'auto'; }
             });
+
+            // Clear Patient Generals Texts
+            const genTextIds = ['genChiefComplaints', 'genAversions', 'genDreams', 'genFears', 'genStress', 'genSweating', 'sysDigSymp', 'sysDigMod', 'sysRespSymp', 'sysRespMod', 'sysUriSymp', 'sysUriMod', 'sysMuscSymp', 'sysMuscMod', 'femMenses', 'femPain', 'femLeuco', 'femPreg', 'histPast', 'histFamOther'];
+            genTextIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.value = ''; el.style.height = 'auto'; }
+            });
+
+            // Clear Patient Generals Checkboxes
+            const genCheckIds = ['therm-hot', 'therm-cold', 'thirst-thirsty', 'thirst-thirstless', 'app-normal', 'app-increased', 'app-decreased', 'des-sweet', 'des-salt', 'des-sour', 'des-spicy', 'sleep-good', 'sleep-disturbed', 'sleep-insomnia', 'ment-irritable', 'ment-anxiety', 'ment-fearful', 'ment-depression', 'comp-likes', 'comp-solitude', 'energy-low', 'energy-normal', 'energy-high', 'sens-cold', 'sens-heat', 'sens-noise', 'sens-light', 'fam-diabetes', 'fam-htn', 'fam-cancer', 'fam-tb', 'mias-psora', 'mias-sycosis', 'mias-syphilis'];
+            genCheckIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.checked = false;
+            });
             
             document.getElementById('drugListContainer').innerHTML = ''; 
             addDrugRow(); 
@@ -2135,19 +2647,27 @@ function populateDatalist() {
 
         window.selectPatient = function(p) {
             currentPatient = p; document.getElementById('workspace').style.display = 'block';
-            hasSavedHistoryThisSession = false; // Resets when a new patient is clicked
+            hasSavedHistoryThisSession = false; 
             document.getElementById('pNameDisplay').innerText = p.name; 
             
             if (p.regNo === 'OLD') {
                 document.getElementById('pDetailsDisplay').innerText = `OLD | ${p.age}Y / ${p.sex} | 📞 ${p.phone || '-'} | 📅 First Visit: ${p.regDate || '-'}`;
                 document.getElementById('section-personal-docs').style.display = 'none';
                 document.getElementById('section-prov-diag').style.display = 'none';
+                document.getElementById('section-patient-generals').style.display = 'none';
                 document.getElementById('section-on-exam').style.display = 'none';
             } else {
                 document.getElementById('pDetailsDisplay').innerText = `#${p.regNo || '?'} | ${p.age}Y / ${p.sex} | 📞 ${p.phone || '-'} | 📅 First Visit: ${p.regDate || '-'}`;
                 document.getElementById('section-personal-docs').style.display = 'block';
                 document.getElementById('section-prov-diag').style.display = 'block';
+                document.getElementById('section-patient-generals').style.display = 'block';
                 document.getElementById('section-on-exam').style.display = 'block';
+            }
+
+            const femSection = document.getElementById('female-section-group');
+            if (femSection) {
+                if (p.sex === 'Female') femSection.style.display = 'block';
+                else femSection.style.display = 'none';
             }
 
             renderDoctorQueue(); 
@@ -2159,12 +2679,49 @@ function populateDatalist() {
                 const el = document.getElementById(id);
                 if(el) { el.value = ''; el.style.height = 'auto'; }
             });
+
+            const genTextIds = ['genChiefComplaints', 'genAversions', 'genDreams', 'genFears', 'genStress', 'genSweating', 'sysDigSymp', 'sysDigMod', 'sysRespSymp', 'sysRespMod', 'sysUriSymp', 'sysUriMod', 'sysMuscSymp', 'sysMuscMod', 'femMenses', 'femPain', 'femLeuco', 'femPreg', 'histPast', 'histFamOther'];
+            genTextIds.forEach(id => { const el = document.getElementById(id); if (el) { el.value = ''; el.style.height = 'auto'; } });
+
+            const genCheckIds = ['therm-hot', 'therm-cold', 'thirst-thirsty', 'thirst-thirstless', 'app-normal', 'app-increased', 'app-decreased', 'des-sweet', 'des-salt', 'des-sour', 'des-spicy', 'sleep-good', 'sleep-disturbed', 'sleep-insomnia', 'ment-irritable', 'ment-anxiety', 'ment-fearful', 'ment-depression', 'comp-likes', 'comp-solitude', 'energy-low', 'energy-normal', 'energy-high', 'sens-cold', 'sens-heat', 'sens-noise', 'sens-light', 'fam-diabetes', 'fam-htn', 'fam-cancer', 'fam-tb', 'mias-psora', 'mias-sycosis', 'mias-syphilis'];
+            genCheckIds.forEach(id => { const el = document.getElementById(id); if (el) el.checked = false; });
+
             document.getElementById('drugListContainer').innerHTML = ''; 
 
             if (p.draft) {
                 document.getElementById('provDiagnosis').value = p.draft.provDiagnosis || '';
                 document.getElementById('docDetails').value = p.draft.notes || '';
                 
+                if (p.draft.generals) {
+                    const g = p.draft.generals;
+                    const setVal = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.value = val; };
+                    const setChk = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.checked = val; };
+
+                    setVal('genChiefComplaints', g.chiefComplaints);
+                    setChk('therm-hot', g.thermHot); setChk('therm-cold', g.thermCold);
+                    setChk('thirst-thirsty', g.thirstThirsty); setChk('thirst-thirstless', g.thirstThirstless);
+                    setChk('app-normal', g.appNormal); setChk('app-increased', g.appInc); setChk('app-decreased', g.appDec);
+                    setChk('des-sweet', g.desSweet); setChk('des-salt', g.desSalt); setChk('des-sour', g.desSour); setChk('des-spicy', g.desSpicy);
+                    setVal('genAversions', g.aversions);
+                    setChk('sleep-good', g.sleepGood); setChk('sleep-disturbed', g.sleepDisturbed); setChk('sleep-insomnia', g.sleepInsomnia);
+                    setVal('genDreams', g.dreams);
+                    setChk('ment-irritable', g.mentIrr); setChk('ment-anxiety', g.mentAnx); setChk('ment-fearful', g.mentFear); setChk('ment-depression', g.mentDep);
+                    setChk('comp-likes', g.compLikes); setChk('comp-solitude', g.compSolitude);
+                    setVal('genFears', g.fears); setVal('genStress', g.stress);
+                    setChk('energy-low', g.energyLow); setChk('energy-normal', g.energyNorm); setChk('energy-high', g.energyHigh);
+                    setVal('genSweating', g.sweating);
+                    setChk('sens-cold', g.sensCold); setChk('sens-heat', g.sensHeat); setChk('sens-noise', g.sensNoise); setChk('sens-light', g.sensLight);
+                    setVal('sysDigSymp', g.sysDigSymp); setVal('sysDigMod', g.sysDigMod);
+                    setVal('sysRespSymp', g.sysRespSymp); setVal('sysRespMod', g.sysRespMod);
+                    setVal('sysUriSymp', g.sysUriSymp); setVal('sysUriMod', g.sysUriMod);
+                    setVal('sysMuscSymp', g.sysMuscSymp); setVal('sysMuscMod', g.sysMuscMod);
+                    setVal('femMenses', g.femMenses); setVal('femPain', g.femPain); setVal('femLeuco', g.femLeuco); setVal('femPreg', g.femPreg);
+                    setVal('histPast', g.histPast);
+                    setChk('fam-diabetes', g.famDiab); setChk('fam-htn', g.famHtn); setChk('fam-cancer', g.famCancer); setChk('fam-tb', g.famTb);
+                    setVal('histFamOther', g.histFamOther);
+                    setChk('mias-psora', g.miasPsora); setChk('mias-sycosis', g.miasSycosis); setChk('mias-syphilis', g.miasSyphilis);
+                }
+
                 if (p.draft.labs) {
                     document.getElementById('examBP').value = p.draft.labs.bp || '';
                     document.getElementById('examPulse').value = p.draft.labs.pulse || '';
@@ -2273,6 +2830,16 @@ function populateDatalist() {
                 });
             }, 100);
         }
+
+        // Make specific checkbox groups mutually exclusive
+        window.handleExclusiveCheckbox = function(clickedCheckbox, groupClass) {
+            if (clickedCheckbox.checked) {
+                const group = document.querySelectorAll('.' + groupClass);
+                group.forEach(cb => {
+                    if (cb !== clickedCheckbox) cb.checked = false;
+                });
+            }
+        };
 
         window.saveAndPrint = async () => {
             if(!currentPatient) return;
