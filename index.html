@@ -661,12 +661,12 @@
                                 <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
                                     <div class="notes-header">
                                         <input type="checkbox" id="includeNotesInPrint" class="notes-checkbox" title="Check to print" checked>
-                                        <label for="includeNotesInPrint" class="notes-label">Patient Personal Documents</label>
+                                        <label for="includeNotesInPrint" class="notes-label">Patient details</label>
                                     </div>
                                     <div class="template-area" id="templateChipContainer"><span class="template-add-btn" onclick="openTemplateManager()">+ Manage Templates</span></div>
                                 </div>
                                 <div class="mic-wrapper">
-                                    <textarea id="docDetails" class="form-control auto-expand" rows="16" placeholder="Type or use templates..."></textarea>
+                                    <textarea id="docDetails" class="form-control auto-expand" rows="4" placeholder="Type or use templates..."></textarea>
                                     <button id="mic-docDetails" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'docDetails')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
                                 </div>
                             </div>
@@ -680,7 +680,7 @@
                                     <div class="template-area" id="diagTemplateChipContainer"><span class="template-add-btn" onclick="openDiagTemplateManager()">+ Manage Templates</span></div>
                                 </div>
                                 <div class="mic-wrapper">
-                                    <textarea id="provDiagnosis" class="form-control auto-expand" rows="4" placeholder="Type or use mic..."></textarea>
+                                    <textarea id="provDiagnosis" class="form-control auto-expand" rows="1" placeholder="Type or use mic..."></textarea>
                                     <button id="mic-provDiagnosis" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'provDiagnosis')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
                                 </div>
                             </div>
@@ -958,6 +958,7 @@
 </div>
 
                             <div id="section-on-exam" style="margin-bottom: 25px; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e5e7eb;">
+                                
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; cursor:pointer;" onclick="toggleExamSection()">
                                     <div style="display:flex; align-items:center; gap: 10px;">
                                         <input type="checkbox" id="includeExamInPrint" class="notes-checkbox" title="Check to print Exam" checked onclick="event.stopPropagation()">
@@ -966,6 +967,21 @@
                                     <span id="examToggleIcon" style="font-weight:bold; color:var(--primary); font-size:1.2em;">▼</span>
                                 </div>
                                 
+                                <div style="margin-top: 20px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
+    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+        <label class="notes-label" style="font-size: 1em;">Additional Custom Vitals / Notes</label>
+        <div class="template-area">
+            <span class="template-chip" onclick="addCustomExamTemplate('BP: \nPulse: ')">+ BP & Pulse</span>
+            <span class="template-chip" onclick="addCustomExamTemplate('SPO2: \nTemp: ')">+ Vitals</span>
+            <span class="template-chip" onclick="addCustomExamTemplate('Weight:  kg\nHeight:  cm')">+ Wt/Ht</span>
+        </div>
+    </div>
+    <div class="mic-wrapper">
+        <textarea id="customExamNotes" class="form-control auto-expand" rows="2" placeholder="Type, use templates, or use mic..."></textarea>
+        <button id="mic-customExamNotes" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'customExamNotes')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
+    </div>
+</div>
+
                                 <div id="examContentBody" style="display:none;">
                                 <div class="lab-grid-row1">
                                     <div class="form-group" id="fg-bp"><label>BP</label>
@@ -1154,6 +1170,18 @@ const KEEP_TEXT_MICS = ['provDiagnosis', 'docDetails', 'testECG', 'testEEG', 'te
             t.classList.add('show');
             setTimeout(() => { t.className = ''; }, 3000); 
         }
+
+        window.addCustomExamTemplate = function(templateText) {
+            const area = document.getElementById('customExamNotes');
+            if (area.value.trim() !== '') {
+                area.value += '\n' + templateText;
+            } else {
+                area.value = templateText;
+            }
+            area.style.height = 'auto'; 
+            area.style.height = (area.scrollHeight) + 'px';
+            area.focus();
+        };
 
         window.toggleGeneralsSection = function() {
             const body = document.getElementById('generalsContentBody');
@@ -2019,16 +2047,12 @@ const KEEP_TEXT_MICS = ['provDiagnosis', 'docDetails', 'testECG', 'testEEG', 'te
             const box = document.getElementById('aiSuggestionsBox');
             const list = document.getElementById('aiSuggestionsList');
 
-            btn.disabled = true;
-            loader.style.display = 'block';
-            box.style.display = 'none';
-
-            // 1. Gather ONLY Clinical Data (No PII)
+            // 1. Gather ONLY Clinical Data
             let clinicalData = "";
             const add = (lbl, val) => { if(val && val.trim() !== '') clinicalData += `${lbl}: ${val.trim()}\n`; };
             const getChk = (sel) => Array.from(document.querySelectorAll(sel)).filter(el => el.checked).map(el => el.parentElement.textContent.trim()).join(', ');
 
-            add("Personal Docs", document.getElementById('docDetails')?.value);
+            add("Patient Details", document.getElementById('docDetails')?.value);
             add("Provisional Diagnosis", document.getElementById('provDiagnosis')?.value);
             add("Vitals", `BP: ${document.getElementById('examBP')?.value || '-'}, Pulse: ${document.getElementById('examPulse')?.value || '-'}`);
             
@@ -2050,65 +2074,66 @@ const KEEP_TEXT_MICS = ['provDiagnosis', 'docDetails', 'testECG', 'testEEG', 'te
             add("Musculoskeletal", document.getElementById('sysMuscSymp')?.value);
             add("Past History", document.getElementById('histPast')?.value);
 
-            if (!clinicalData.trim()) {
-                showToast("No clinical data entered to analyze!", "error");
-                btn.disabled = false; loader.style.display = 'none';
-                return;
+            // VALIDATION: Strip all spaces and check if the doctor actually entered anything.
+            const strippedData = clinicalData.replace(/[^a-zA-Z0-9]/g, '');
+            if (strippedData.length < 5) {
+                showToast("Please enter patient symptoms, vitals, or complaints before analyzing.", "error");
+                return; // Stop the function completely
             }
 
-            // 2. Call Groq Text API with Error Catching & Fallbacks
+            btn.disabled = true;
+            loader.style.display = 'block';
+            box.style.display = 'none';
+
             let rawText = null;
             let lastError = "";
             
-            let prompt = `You are an expert physician and homeopath. Analyze the following patient symptoms/data and suggest 3 to 5 highly relevant medicines. Return ONLY a valid JSON array of objects. Format strictly like this: [{"name": "MedicineName", "type": "TAB" | "SYP" | "CAP" | "DROP" | "OINTMENT", "strength": "e.g. 500mg or 200CH"}]. Do not include any other text, markdown formatting, or explanations.\n\nClinical Data:\n${clinicalData}`;
+            // Ask for up to 10 medicines so we can use the "More" button
+            let prompt = `You are an expert physician. Analyze the following patient symptoms/data and suggest 5 to 10 highly relevant medicines. Return ONLY a valid JSON array of objects. Format strictly like this: [{"name": "MedicineName", "type": "TAB" | "SYP" | "CAP" | "DROP" | "OINTMENT", "strength": "e.g. 500mg or 200CH"}]. Do not include any other text.\n\nClinical Data:\n${clinicalData}`;
 
             for (let key of groqApiKeys) {
                 try {
                     let res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                         method: "POST",
-                        headers: { 
-                            "Authorization": `Bearer ${key.trim()}`, // .trim() removes accidental spaces
-                            "Content-Type": "application/json" 
-                        },
+                        headers: { "Authorization": `Bearer ${key.trim()}`, "Content-Type": "application/json" },
                         body: JSON.stringify({
-                            model: "llama-3.1-8b-instant", // Updated to Groq's most reliable fast model
+                            model: "llama-3.1-8b-instant",
                             messages: [{ role: "user", content: prompt }],
                             temperature: 0.2
                         })
                     });
 
                     if (!res.ok) {
-                        let errorText = await res.text();
-                        console.error(`🚨 Groq API Error (Status ${res.status}):`, errorText);
-                        lastError = `Status ${res.status}: ${errorText}`;
-                        continue; // Try the next API key if you have multiples
+                        lastError = await res.text();
+                        continue; 
                     }
                     
                     let data = await res.json();
                     rawText = data.choices[0].message.content.trim();
-                    break; // Success! Break out of the loop
+                    break; 
                 } catch(e) {
-                    console.error("Network/Parsing Error:", e);
                     lastError = e.message;
                 }
             }
 
-            // 3. Process AI Response
             try {
-                if (!rawText) throw new Error("No response from Groq. Last Error: " + lastError);
-                
-                // Cleanup AI markdown output just in case
+                if (!rawText) throw new Error(lastError);
                 if (rawText.startsWith("```json")) rawText = rawText.replace(/```json/g, "").replace(/```/g, "").trim();
                 if (rawText.startsWith("```")) rawText = rawText.replace(/```/g, "").trim();
 
                 let suggestions = JSON.parse(rawText);
 
-                // Render the UI Box
                 list.innerHTML = "";
-                suggestions.forEach(med => {
-                    let div = document.createElement('div');
-                    div.style = "display:flex; justify-content:space-between; align-items:center; background:white; padding:12px; border-radius:6px; border:1px solid #bfdbfe; box-shadow: 0 1px 3px rgba(0,0,0,0.05);";
-                    div.innerHTML = `
+                let visibleDiv = document.createElement('div');
+                visibleDiv.style.display = 'flex'; visibleDiv.style.flexDirection = 'column'; visibleDiv.style.gap = '10px';
+                
+                let hiddenDiv = document.createElement('div');
+                hiddenDiv.style.display = 'none'; hiddenDiv.style.flexDirection = 'column'; hiddenDiv.style.gap = '10px'; hiddenDiv.style.marginTop = '10px';
+
+                suggestions.forEach((med, index) => {
+                    let item = document.createElement('div');
+                    item.style = "display:flex; justify-content:space-between; align-items:center; background:white; padding:12px; border-radius:6px; border:1px solid #bfdbfe; box-shadow: 0 1px 3px rgba(0,0,0,0.05);";
+                    item.innerHTML = `
                         <div>
                             <strong style="color:#1e3a8a; font-size:16px;">${med.name}</strong>
                             <span style="font-size:12px; font-weight:bold; background:#e5e7eb; color:#374151; padding:3px 8px; border-radius:4px; margin-left:10px;">${med.type || 'TAB'}</span>
@@ -2116,13 +2141,30 @@ const KEEP_TEXT_MICS = ['provDiagnosis', 'docDetails', 'testECG', 'testEEG', 'te
                         </div>
                         <button class="btn btn-green btn-sm" style="padding: 6px 12px; font-size: 14px;" onclick="addSuggestedMedicine('${(med.name||'').replace(/'/g,"\\'")}', '${(med.type||'TAB').replace(/'/g,"\\'")}', '${(med.strength||'').replace(/'/g,"\\'")}')">+ Add</button>
                     `;
-                    list.appendChild(div);
+                    
+                    if (index < 5) visibleDiv.appendChild(item);
+                    else hiddenDiv.appendChild(item);
                 });
+
+                list.appendChild(visibleDiv);
+
+                if (suggestions.length > 5) {
+                    list.appendChild(hiddenDiv);
+                    let moreBtn = document.createElement('button');
+                    moreBtn.className = "btn btn-secondary";
+                    moreBtn.style = "width: 100%; margin-top: 10px; border: 1px dashed #93c5fd; background: #f8fafc; color: var(--primary);";
+                    moreBtn.innerText = `View ${suggestions.length - 5} More Suggestions ▼`;
+                    moreBtn.onclick = () => {
+                        hiddenDiv.style.display = 'flex';
+                        moreBtn.style.display = 'none';
+                    };
+                    list.appendChild(moreBtn);
+                }
 
                 box.style.display = 'block';
             } catch (e) {
-                console.error("Failed to parse AI response:", e, "\nRaw AI Text:", rawText);
-                showToast("Failed to process AI suggestions. Check console.", "error");
+                console.error("AI Error:", e, rawText);
+                showToast("Failed to process AI suggestions.", "error");
             } finally {
                 btn.disabled = false;
                 loader.style.display = 'none';
