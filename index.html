@@ -524,7 +524,7 @@
                         <img src="logo2.png" alt="Clinic Logo" style="width: 80px; height: 80px; border-radius: 50%; object-fit: contain; border: 2px solid var(--primary); background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onerror="this.style.display='none'">
                         <div style="text-align: left; display: flex; flex-direction: column; align-items: flex-start;">
                             <h2 style="color: var(--primary); margin: 0; font-size: 1.4em; text-transform: uppercase; white-space: nowrap;">Dr. Bharat's Arogya Homeopathy</h2>
-                            <p style="margin: 4px 0 0 0; color: #444; font-size: 1.1em; font-weight: bold; white-space: nowrap;">Hindalaga Road, Ambewadi</p>
+                            <p style="margin: 4px 0 0 0; color: #444; font-size: 1.1em; font-weight: bold; white-space: nowrap;">Hindalaga</p>
                         </div>
                     </div>
             
@@ -650,7 +650,7 @@
                                 <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
                                     <div class="notes-header">
                                         <input type="checkbox" id="includeNotesInPrint" class="notes-checkbox" title="Check to print" checked>
-                                        <label for="includeNotesInPrint" class="notes-label">Patient details</label>
+                                        <label for="includeNotesInPrint" class="notes-label">Patient Details</label>
                                     </div>
                                     <div class="template-area" id="templateChipContainer"><span class="template-add-btn" onclick="openTemplateManager()">+ Manage Templates</span></div>
                                 </div>
@@ -678,19 +678,29 @@
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; cursor:pointer;" onclick="toggleGeneralsSection()">
                                     <div style="display:flex; align-items:center; gap: 10px;">
                                         <input type="checkbox" id="includeGeneralsInPrint" class="notes-checkbox" title="Check to print Generals" checked onclick="event.stopPropagation()">
-                                        <label for="includeGeneralsInPrint" class="notes-label" onclick="event.stopPropagation()">Patient Generals</label>
+                                        <label for="includeGeneralsInPrint" class="notes-label" onclick="event.stopPropagation()">Homeopathic Approach</label>
                                     </div>
                                     <span id="generalsToggleIcon" style="font-weight:bold; color:var(--primary); font-size:1.2em;">▼</span>
                                 </div>
                                 
                                 <div id="generalsContentBody" style="display:none;">
                                     
-                                    <div class="form-group">
-                                        <label>Chief Complaints</label>
+                                    <div class="grid-2">
+                                        <div class="form-group" style="margin-bottom: 20px;">
+                                        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5px;">
+                                            <label style="margin: 0;">Chief Complaints</label>
+                                            <label style="display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--dr-red); cursor: pointer; font-weight: bold; background: #fee2e2; padding: 4px 8px; border-radius: 4px; border: 1px solid #fca5a5;">
+                                                <input type="checkbox" id="genPQRS_check" style="width: 14px; height: 14px; margin: 0;"> 
+                                                Mark as PQRS
+                                            </label>
+                                        </div>
                                         <div class="mic-wrapper">
                                             <textarea id="genChiefComplaints" class="auto-expand" rows="3" placeholder="Enter chief complaints..."></textarea>
-                                            <button id="mic-genChiefComplaints" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'genChiefComplaints')"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
+                                            <button id="mic-genChiefComplaints" type="button" class="mic-btn" onmousedown="handleManualMicClick(event, 'genChiefComplaints')">
+                                                <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                                            </button>
                                         </div>
+                                    </div>
                                     </div>
 
                                     <div class="grid-3">
@@ -950,7 +960,7 @@
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                                     <div class="notes-header" style="margin:0;">
                                         <input type="checkbox" id="includeExamInPrint" class="notes-checkbox" title="Check to print Exam" checked>
-                                        <label for="includeExamInPrint" class="notes-label">On Examination</label>
+                                        <label for="includeExamInPrint" class="notes-label">Investigation</label>
                                     </div>
                                     <div class="template-area" id="examTemplateChipContainer">
                                         <span class="template-add-btn" onclick="window.openExamTemplateManager()">+ Manage Templates</span>
@@ -1120,7 +1130,7 @@
         let sessionStartText = "", sessionCursorPos = 0, sessionSpace = "", currentWebkitText = "";
         let currentTemplateAction = null;
 
-        const KEEP_TEXT_MICS = ['provDiagnosis', 'docDetails', 'examNotes', 'regDiagnosis', 'regAddress', 'genChiefComplaints', 'genAversions', 'genDreams', 'genFears', 'genStress', 'genSweating', 'sysDigSymp', 'sysDigMod', 'sysRespSymp', 'sysRespMod', 'sysUriSymp', 'sysUriMod', 'sysMuscSymp', 'sysMuscMod', 'femMenses', 'femPain', 'femLeuco', 'femPreg', 'histPast', 'histFamOther'];
+        const KEEP_TEXT_MICS = ['provDiagnosis', 'docDetails', 'examNotes', 'regDiagnosis', 'regAddress', 'genChiefComplaints','genAversions', 'genDreams', 'genFears', 'genStress', 'genSweating', 'sysDigSymp', 'sysDigMod', 'sysRespSymp', 'sysRespMod', 'sysUriSymp', 'sysUriMod', 'sysMuscSymp', 'sysMuscMod', 'femMenses', 'femPain', 'femLeuco', 'femPreg', 'histPast', 'histFamOther'];
 
         function showToast(msg, type='neutral') {
             const t = document.getElementById('toast');
@@ -1258,7 +1268,10 @@
 
         window.deleteExamTemplate = async function(id) { 
             if(confirm("Delete this template?")) {
-                await deleteDoc(doc(db, "examTemplates", id)); 
+                try {
+                    await deleteDoc(doc(db, "examTemplates", id)); 
+                    showToast("Exam Template deleted permanently", "success");
+                } catch(e) { console.error(e); showToast("Error deleting", "error"); }
             }
         };
         
@@ -1412,11 +1425,23 @@
             try { await signInWithEmailAndPassword(auth, email, pass); } catch(e) { showToast(e.message, "error"); document.getElementById('loadingOverlay').style.display = 'none'; }
         };
 
+        let geminiApiKeys = []; // Added for Gemini
+        
         window.signup = async () => {
             const email = document.getElementById('regEmail').value, pass = document.getElementById('regPass').value, code = document.getElementById('regCode').value;
-            if(code !== CLINIC_CODE) return showToast("Wrong Code", "error");
             document.getElementById('loadingOverlay').style.display = 'flex';
-            try { await createUserWithEmailAndPassword(auth, email, pass); } catch(e) { showToast(e.message, "error"); document.getElementById('loadingOverlay').style.display = 'none'; }
+            
+            try {
+                // Fetch the secret code from Firestore securely
+                const settingsDoc = await getDoc(doc(db, "system", "settings"));
+                const correctCode = settingsDoc.exists() ? settingsDoc.data().staffCode : "NEURO2026";
+                
+                if(code !== correctCode) throw new Error("Invalid Clinic Code");
+                await createUserWithEmailAndPassword(auth, email, pass); 
+            } catch(e) { 
+                showToast(e.message, "error"); 
+                document.getElementById('loadingOverlay').style.display = 'none'; 
+            }
         };
 
         window.logout = () => { document.getElementById('loadingOverlay').style.display = 'flex'; signOut(auth); };
@@ -1429,13 +1454,12 @@
             setupListeners();
             applySettings();
             await seedMedicines();
-            await seedTemplates();
-            await seedDiagTemplates();
 
             onSnapshot(doc(db, "system", "apikeys"), (d) => {
                 if(d.exists()) {
                     const data = d.data();
                     groqApiKeys = [data.groq1, data.groq2, data.groq3].filter(k => k);
+                    geminiApiKeys = [data.gemini1, data.gemini2, data.gemini3].filter(k => k); // Load Gemini keys
                 }
             });
 
@@ -1451,42 +1475,68 @@
                 cloudMedicines = s.docs.map(d => ({ id: d.id, ...d.data() }));
                 populateDatalist(); renderMedManagerList();
             });
+            
+            // Listen for templates, but DO NOT auto-generate them if empty
             onSnapshot(collection(db, "clinicalTemplates"), (s) => {
                 clinicalTemplates = s.docs.map(d => ({ id: d.id, ...d.data() }));
-                renderTemplateChips(); renderTemplateManagerList();
+                if(typeof window.renderTemplateChips === 'function') window.renderTemplateChips(); 
+                if(typeof window.renderTemplateManagerList === 'function') window.renderTemplateManagerList();
             });
             onSnapshot(collection(db, "diagnosisTemplates"), (s) => {
                 diagTemplates = s.docs.map(d => ({ id: d.id, ...d.data() }));
-                renderDiagTemplateChips(); renderDiagTemplateManagerList();
+                if(typeof window.renderDiagTemplateChips === 'function') window.renderDiagTemplateChips(); 
+                if(typeof window.renderDiagTemplateManagerList === 'function') window.renderDiagTemplateManagerList();
             });
             onSnapshot(collection(db, "examTemplates"), (s) => {
                 examTemplates = s.docs.map(d => ({ id: d.id, ...d.data() }));
-                if (examTemplates.length === 0) {
-                    DEFAULT_EXAM_TEMPLATES.forEach(t => addDoc(collection(db, "examTemplates"), t));
-                }
-                window.renderExamTemplateChips(); 
-                window.renderExamTemplateManagerList();
+                if(typeof window.renderExamTemplateChips === 'function') window.renderExamTemplateChips(); 
+                if(typeof window.renderExamTemplateManagerList === 'function') window.renderExamTemplateManagerList();
             });
             
-            ['reviewSearch', 'regName', 'regAddress', 'regDiagnosis', 'provDiagnosis', 'docDetails', 'examNotes', 'genChiefComplaints', 'genAversions', 'genDreams', 'genFears', 'genStress', 'genSweating', 'sysDigSymp', 'sysDigMod', 'sysRespSymp', 'sysRespMod', 'sysUriSymp', 'sysUriMod', 'sysMuscSymp', 'sysMuscMod', 'femMenses', 'femPain', 'femLeuco', 'femPreg', 'histPast', 'histFamOther'].forEach(attachMicListeners);            
+            // Added genPQRS to the mic arrays
+            const allTextMics = ['reviewSearch', 'regName', 'regAddress', 'regDiagnosis', 'provDiagnosis', 'docDetails', 'examNotes', 'genChiefComplaints', 'genAversions', 'genDreams', 'genFears', 'genStress', 'genSweating', 'sysDigSymp', 'sysDigMod', 'sysRespSymp', 'sysRespMod', 'sysUriSymp', 'sysUriMod', 'sysMuscSymp', 'sysMuscMod', 'femMenses', 'femPain', 'femLeuco', 'femPreg', 'histPast', 'histFamOther'];
+            allTextMics.forEach(attachMicListeners);            
             
             document.querySelectorAll('.auto-expand').forEach(el => {
                 el.addEventListener('input', function() {
-                    this.style.height = 'auto';
-                    this.style.height = (this.scrollHeight) + 'px';
+                    this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px';
                 });
-            });
-
-            document.addEventListener('click', function(e) {
-                if(!e.target.closest('.custom-dropdown-container')) {
-                    document.querySelectorAll('.custom-dropdown').forEach(d => d.style.display = 'none');
-                }
             });
         }
 
-        async function seedMedicines() { const snap = await getDocs(collection(db, "medicines")); if(snap.empty && typeof medicineDatabase !== 'undefined') for (const [n, s] of Object.entries(medicineDatabase)) await addDoc(collection(db, "medicines"), { name: n, strengths: s }); }
-        async function seedTemplates() { const snap = await getDocs(collection(db, "clinicalTemplates")); if(snap.empty) for(const t of DEFAULT_TEMPLATES) await addDoc(collection(db, "clinicalTemplates"), t); }
-        async function seedDiagTemplates() { const snap = await getDocs(collection(db, "diagnosisTemplates")); if(snap.empty) for(const t of DEFAULT_DIAG_TEMPLATES) await addDoc(collection(db, "diagnosisTemplates"), t); }
+        async function seedMedicines() { 
+            if(localStorage.getItem('seeded_meds')) return;
+            const snap = await getDocs(collection(db, "medicines")); 
+            if(snap.empty && typeof medicineDatabase !== 'undefined') {
+                for (const [n, s] of Object.entries(medicineDatabase)) await addDoc(collection(db, "medicines"), { name: n, strengths: s }); 
+            }
+            localStorage.setItem('seeded_meds', 'true');
+        }
+        async function seedTemplates() { 
+            if(localStorage.getItem('seeded_clin')) return;
+            const snap = await getDocs(collection(db, "clinicalTemplates")); 
+            if(snap.empty) {
+                for(const t of DEFAULT_TEMPLATES) await addDoc(collection(db, "clinicalTemplates"), t); 
+            }
+            localStorage.setItem('seeded_clin', 'true');
+        }
+        async function seedDiagTemplates() { 
+            if(localStorage.getItem('seeded_diag')) return;
+            const snap = await getDocs(collection(db, "diagnosisTemplates")); 
+            if(snap.empty) {
+                for(const t of DEFAULT_DIAG_TEMPLATES) await addDoc(collection(db, "diagnosisTemplates"), t); 
+            }
+            localStorage.setItem('seeded_diag', 'true');
+        }
+        // Run Exam seed only once
+        setTimeout(async () => {
+            if(localStorage.getItem('seeded_exam')) return;
+            const snap = await getDocs(collection(db, "examTemplates"));
+            if(snap.empty) {
+                for(const t of DEFAULT_EXAM_TEMPLATES) await addDoc(collection(db, "examTemplates"), t);
+            }
+            localStorage.setItem('seeded_exam', 'true');
+        }, 1500);
 
         async function callGroqAPI(audioBlob) {
             let keys = groqApiKeys;
@@ -1714,7 +1764,7 @@
         };
 
         window.analyzeSymptomsWithAI = async function() {
-            if (groqApiKeys.length === 0) { showToast("Groq API Key missing in system settings!", "error"); return; }
+            if (geminiApiKeys.length === 0) { showToast("Gemini API Key missing in Firestore!", "error"); return; }
 
             const btn = document.getElementById('btnAnalyzeAI');
             const loader = document.getElementById('aiLoadingIndicator');
@@ -1722,14 +1772,17 @@
             const list = document.getElementById('aiSuggestionsList');
 
             let clinicalData = "";
-            const add = (lbl, val) => { if(val && val.trim() !== '') clinicalData += `${lbl}: ${val.trim()}\n`; };
+            const add = (lbl, val) => { if(val && val.trim() !== '') clinicalData += `* ${lbl}: ${val.trim()}\n`; };
             const getChk = (sel) => Array.from(document.querySelectorAll(sel)).filter(el => el.checked).map(el => el.parentElement.textContent.trim()).join(', ');
+
+            // Check if PQRS is checked to notify the AI
+            const isPQRS = document.getElementById('genPQRS_check')?.checked;
+            const ccLabel = isPQRS ? "Chief Complaints (MARKED AS P.Q.R.S - HIGH PRIORITY)" : "Chief Complaints";
 
             add("Patient Details", document.getElementById('docDetails')?.value);
             add("Provisional Diagnosis", document.getElementById('provDiagnosis')?.value);
             add("Exam Notes", document.getElementById('examNotes')?.value);
-            
-            add("Chief Complaints", document.getElementById('genChiefComplaints')?.value);
+            add(ccLabel, document.getElementById('genChiefComplaints')?.value);
             add("Thermals/Thirst/Appetite", [getChk('.chk-therm'), getChk('.chk-thirst'), getChk('.chk-appetite')].filter(Boolean).join(' | '));
             add("Desires", getChk('#des-sweet, #des-salt, #des-sour, #des-spicy'));
             add("Aversions", document.getElementById('genAversions')?.value);
@@ -1747,23 +1800,44 @@
             add("Past History", document.getElementById('histPast')?.value);
 
             const strippedData = clinicalData.replace(/[^a-zA-Z0-9]/g, '');
-            if (strippedData.length < 5) { showToast("Please enter patient symptoms, vitals, or complaints before analyzing.", "error"); return; }
+            if (strippedData.length < 5) { showToast("Please enter patient symptoms or complaints before analyzing.", "error"); return; }
 
             btn.disabled = true; loader.style.display = 'block'; box.style.display = 'none';
             let rawText = null, lastError = "";
             
-            let prompt = `You are an expert physician. Analyze the following patient symptoms/data and suggest 5 highly relevant Homeopathic medicines. Return ONLY a valid JSON array of objects. Format strictly like this: [{"name": "MedicineName", "type": "TAB" | "SYP" | "CAP" | "DROP" | "OINTMENT", "strength": "e.g. 500mg or 200CH"}]. Do not include any other text.\n\nClinical Data:\n${clinicalData}`;
+            // ========================================================================
+            // EDIT YOUR AI PROMPT HERE
+            // ========================================================================
+            let promptText = `Act as an expert, highly experienced Homeopathic Consultant.
+Analyze the provided clinical patient symptoms below. 
+If any symptoms are marked as P.Q.R.S (Peculiar, Queer, Rare, Strange), you MUST give them the highest priority for selecting the remedy.
+Suggest less than 5 of the most accurate, highly relevant homeopathic medicines.
 
-            for (let key of groqApiKeys) {
+Return ONLY a valid JSON array of objects. Format strictly like this: [{"name": "Medicine Name", "type": "TAB" | "SYP" | "CAP" | "DROP" | "OINTMENT", "strength": "e.g. 30mg, 200CH, 1M"}]. 
+
+
+Clinical Data:
+${clinicalData}`;
+            // ========================================================================
+
+            for (let key of geminiApiKeys) {
                 try {
-                    let res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                        method: "POST", headers: { "Authorization": `Bearer ${key.trim()}`, "Content-Type": "application/json" },
-                        body: JSON.stringify({ model: "llama-3.1-8b-instant", messages: [{ role: "user", content: prompt }], temperature: 0.2 })
+                    // Upgraded to Gemini 2.5 Flash
+                    let res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key.trim()}`, {
+                        method: "POST", headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: promptText }] }],
+                            generationConfig: { temperature: 0.2 }
+                        })
                     });
+                    
                     if (!res.ok) { lastError = await res.text(); continue; }
+                    
                     let data = await res.json();
-                    rawText = data.choices[0].message.content.trim();
-                    break; 
+                    if(data.candidates && data.candidates.length > 0) {
+                        rawText = data.candidates[0].content.parts[0].text.trim();
+                        break;
+                    }
                 } catch(e) { lastError = e.message; }
             }
 
@@ -1776,38 +1850,25 @@
                 list.innerHTML = "";
                 let visibleDiv = document.createElement('div');
                 visibleDiv.style.display = 'flex'; visibleDiv.style.flexDirection = 'column'; visibleDiv.style.gap = '10px';
-                
-                let hiddenDiv = document.createElement('div');
-                hiddenDiv.style.display = 'none'; hiddenDiv.style.flexDirection = 'column'; hiddenDiv.style.gap = '10px'; hiddenDiv.style.marginTop = '10px';
 
-                suggestions.forEach((med, index) => {
+                suggestions.forEach((med) => {
                     let item = document.createElement('div');
                     item.style = "display:flex; justify-content:space-between; align-items:center; background:white; padding:12px; border-radius:6px; border:1px solid #bfdbfe; box-shadow: 0 1px 3px rgba(0,0,0,0.05);";
                     item.innerHTML = `
                         <div>
                             <strong style="color:#1e3a8a; font-size:16px;">${med.name}</strong>
-                            <span style="font-size:12px; font-weight:bold; background:#e5e7eb; color:#374151; padding:3px 8px; border-radius:4px; margin-left:10px;">${med.type || 'TAB'}</span>
+                            <span style="font-size:12px; font-weight:bold; background:#e5e7eb; color:#374151; padding:3px 8px; border-radius:4px; margin-left:10px;">${med.type || 'DROP'}</span>
                             <span style="font-size:13px; font-weight:bold; color:#b91c1c; margin-left:8px;">${med.strength || ''}</span>
                         </div>
                         <button class="btn btn-green btn-sm" style="padding: 6px 12px; font-size: 14px;" onclick="addSuggestedMedicine('${(med.name||'').replace(/'/g,"\\'")}', '${(med.type||'TAB').replace(/'/g,"\\'")}', '${(med.strength||'').replace(/'/g,"\\'")}')">+ Add</button>
                     `;
-                    if (index < 5) visibleDiv.appendChild(item); else hiddenDiv.appendChild(item);
+                    visibleDiv.appendChild(item);
                 });
 
                 list.appendChild(visibleDiv);
-
-                if (suggestions.length > 5) {
-                    list.appendChild(hiddenDiv);
-                    let moreBtn = document.createElement('button');
-                    moreBtn.className = "btn btn-secondary";
-                    moreBtn.style = "width: 100%; margin-top: 10px; border: 1px dashed #93c5fd; background: #f8fafc; color: var(--primary);";
-                    moreBtn.innerText = `View ${suggestions.length - 5} More Suggestions ▼`;
-                    moreBtn.onclick = () => { hiddenDiv.style.display = 'flex'; moreBtn.style.display = 'none'; };
-                    list.appendChild(moreBtn);
-                }
                 box.style.display = 'block';
             } catch (e) {
-                console.error("AI Error:", e, rawText); showToast("Failed to process AI suggestions.", "error");
+                console.error("Gemini AI Error:", e, rawText); showToast("Failed to parse Gemini response.", "error");
             } finally {
                 btn.disabled = false; loader.style.display = 'none';
             }
@@ -2469,6 +2530,7 @@
             // Gather Patient Generals Data
             const generals = {
                 chiefComplaints: document.getElementById('genChiefComplaints')?.value || '',
+                pqrsCheck: document.getElementById('genPQRS_check')?.checked || false,
                 thermHot: document.getElementById('therm-hot')?.checked || false,
                 thermCold: document.getElementById('therm-cold')?.checked || false,
                 thirstThirsty: document.getElementById('thirst-thirsty')?.checked || false,
@@ -2550,7 +2612,7 @@
                 if (el) { el.value = ''; el.style.height = 'auto'; }
             });
 
-            const genCheckIds = ['therm-hot', 'therm-cold', 'thirst-thirsty', 'thirst-thirstless', 'app-normal', 'app-increased', 'app-decreased', 'des-sweet', 'des-salt', 'des-sour', 'des-spicy', 'sleep-good', 'sleep-disturbed', 'sleep-insomnia', 'ment-irritable', 'ment-anxiety', 'ment-fearful', 'ment-depression', 'comp-likes', 'comp-solitude', 'energy-low', 'energy-normal', 'energy-high', 'sens-cold', 'sens-heat', 'sens-noise', 'sens-light', 'fam-diabetes', 'fam-htn', 'fam-cancer', 'fam-tb', 'mias-psora', 'mias-sycosis', 'mias-syphilis'];
+            const genCheckIds = ['genPQRS_check','therm-hot', 'therm-cold', 'thirst-thirsty', 'thirst-thirstless', 'app-normal', 'app-increased', 'app-decreased', 'des-sweet', 'des-salt', 'des-sour', 'des-spicy', 'sleep-good', 'sleep-disturbed', 'sleep-insomnia', 'ment-irritable', 'ment-anxiety', 'ment-fearful', 'ment-depression', 'comp-likes', 'comp-solitude', 'energy-low', 'energy-normal', 'energy-high', 'sens-cold', 'sens-heat', 'sens-noise', 'sens-light', 'fam-diabetes', 'fam-htn', 'fam-cancer', 'fam-tb', 'mias-psora', 'mias-sycosis', 'mias-syphilis'];
             genCheckIds.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.checked = false;
@@ -2621,6 +2683,7 @@
                     const setChk = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.checked = val; };
 
                     setVal('genChiefComplaints', g.chiefComplaints);
+                    setChk('genPQRS_check', g.pqrsCheck);
                     setChk('therm-hot', g.thermHot); setChk('therm-cold', g.thermCold);
                     setChk('thirst-thirsty', g.thirstThirsty); setChk('thirst-thirstless', g.thirstThirstless);
                     setChk('app-normal', g.appNormal); setChk('app-increased', g.appInc); setChk('app-decreased', g.appDec);
@@ -2833,7 +2896,8 @@
                     let gHtml = "";
                     const addGen = (label, val) => { if(val) gHtml += `<b>${label}:</b> ${val}<br>`; };
 
-                    addGen("Chief Complaints", document.getElementById('genChiefComplaints')?.value.trim());
+                    const isPQRS = document.getElementById('genPQRS_check')?.checked;
+                    addGen(isPQRS ? "Chief Complaints (P.Q.R.S)" : "Chief Complaints", document.getElementById('genChiefComplaints')?.value.trim());
                     
                     const therm = getChecked('.chk-therm');
                     const thirst = getChecked('.chk-thirst');
@@ -3004,7 +3068,7 @@
             const doseOpts = `<option value="0">0</option><option value="0.5">½</option><option value="1.5">1½</option><option value="2">2</option><option value="3">3</option>`; 
             
             div.innerHTML = `
-                <div class="col-name"><label>Medicine Name</label>
+                <div class="col-name"><label>Prescription</label>
                     <div class="custom-dropdown-container" style="position:relative;">
                         <div class="mic-wrapper">
                             <input type="text" id="name-${rowCount}" placeholder="Type medicine..." oninput="filterMedicines(${rowCount})" onfocus="showMedicineList(${rowCount})" autocomplete="off">
@@ -3297,8 +3361,14 @@
             window.resetTemplateForm();
         };
 
-        window.deleteTemplate = async (id) => { if(confirm("Delete this template?")) await deleteDoc(doc(db, "clinicalTemplates", id)); };
-        
+window.deleteTemplate = async (id) => { 
+            if(confirm("Delete this template?")) {
+                try {
+                    await deleteDoc(doc(db, "clinicalTemplates", id)); 
+                    showToast("Template deleted permanently", "success");
+                } catch(e) { console.error(e); showToast("Error deleting", "error"); }
+            }
+        };        
         window.renderTemplateManagerList = function() { 
             const div = document.getElementById('templateListContainer'); 
             if(!div) return;
@@ -3330,8 +3400,14 @@
             window.resetDiagTemplateForm();
         };
 
-        window.deleteDiagTemplate = async (id) => { if(confirm("Delete this Diagnosis template?")) await deleteDoc(doc(db, "diagnosisTemplates", id)); };
-        
+window.deleteDiagTemplate = async (id) => { 
+            if(confirm("Delete this Diagnosis template?")) {
+                try {
+                    await deleteDoc(doc(db, "diagnosisTemplates", id)); 
+                    showToast("Diagnosis Template deleted permanently", "success");
+                } catch(e) { console.error(e); showToast("Error deleting", "error"); }
+            }
+        };        
         window.renderDiagTemplateManagerList = function() { 
             const div = document.getElementById('diagTemplateListContainer'); 
             if(!div) return;
