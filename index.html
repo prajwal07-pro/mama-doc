@@ -1752,7 +1752,7 @@
             btn.disabled = true; loader.style.display = 'block'; box.style.display = 'none';
             let rawText = null, lastError = "";
             
-            let prompt = `You are an expert physician. Analyze the following patient symptoms/data and suggest 5 to 10 highly relevant medicines. Return ONLY a valid JSON array of objects. Format strictly like this: [{"name": "MedicineName", "type": "TAB" | "SYP" | "CAP" | "DROP" | "OINTMENT", "strength": "e.g. 500mg or 200CH"}]. Do not include any other text.\n\nClinical Data:\n${clinicalData}`;
+            let prompt = `You are an expert physician. Analyze the following patient symptoms/data and suggest 5 highly relevant Homeopathic medicines. Return ONLY a valid JSON array of objects. Format strictly like this: [{"name": "MedicineName", "type": "TAB" | "SYP" | "CAP" | "DROP" | "OINTMENT", "strength": "e.g. 500mg or 200CH"}]. Do not include any other text.\n\nClinical Data:\n${clinicalData}`;
 
             for (let key of groqApiKeys) {
                 try {
