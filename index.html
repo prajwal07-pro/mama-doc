@@ -317,7 +317,7 @@
                 <input type="hidden" id="uniModalMode"> 
                 <input type="hidden" id="uniModalTargetId"> 
                 <div class="form-group">
-                    <label>Prescription</label>
+                    <label>Medicine Name</label>
                     <input type="text" id="uniModalName" placeholder="e.g. Paracetamol">
                 </div>
                 <div class="form-group">
@@ -452,7 +452,7 @@
 
                 <h5 style="margin-top:20px; border-bottom:1px solid #eee; padding-bottom:5px;">Medicine Fields Customization</h5>
                 <div class="grid-3">
-                    <div class="form-group"><label>Prescription</label><select id="set-medName"><option value="compulsory">Compulsory</option><option value="optional">Optional</option></select></div>
+                    <div class="form-group"><label>Medicine Name</label><select id="set-medName"><option value="compulsory">Compulsory</option><option value="optional">Optional</option></select></div>
                     <div class="form-group"><label>Strength</label><select id="set-medStr"><option value="optional">Optional</option><option value="compulsory">Compulsory</option><option value="hidden">Hidden</option></select></div>
                     <div class="form-group"><label>Morning (M)</label><select id="set-medM"><option value="optional">Optional</option><option value="compulsory">Compulsory</option><option value="hidden">Hidden</option></select></div>
                     <div class="form-group"><label>Afternoon (A)</label><select id="set-medA"><option value="optional">Optional</option><option value="compulsory">Compulsory</option><option value="hidden">Hidden</option></select></div>
@@ -524,7 +524,7 @@
                         <img src="logo2.png" alt="Clinic Logo" style="width: 80px; height: 80px; border-radius: 50%; object-fit: contain; border: 2px solid var(--primary); background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onerror="this.style.display='none'">
                         <div style="text-align: left; display: flex; flex-direction: column; align-items: flex-start;">
                             <h2 style="color: var(--primary); margin: 0; font-size: 1.4em; text-transform: uppercase; white-space: nowrap;">Dr. Bharat's Arogya Homeopathy</h2>
-                            <p style="margin: 4px 0 0 0; color: #444; font-size: 1.1em; font-weight: bold; white-space: nowrap;">Hindalaga Road</p>
+                            <p style="margin: 4px 0 0 0; color: #444; font-size: 1.1em; font-weight: bold; white-space: nowrap;">Hindalaga Road, Ambewadi</p>
                         </div>
                     </div>
             
@@ -650,7 +650,7 @@
                                 <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
                                     <div class="notes-header">
                                         <input type="checkbox" id="includeNotesInPrint" class="notes-checkbox" title="Check to print" checked>
-                                        <label for="includeNotesInPrint" class="notes-label">Patient Details</label>
+                                        <label for="includeNotesInPrint" class="notes-label">Patient details</label>
                                     </div>
                                     <div class="template-area" id="templateChipContainer"><span class="template-add-btn" onclick="openTemplateManager()">+ Manage Templates</span></div>
                                 </div>
@@ -678,7 +678,7 @@
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; cursor:pointer;" onclick="toggleGeneralsSection()">
                                     <div style="display:flex; align-items:center; gap: 10px;">
                                         <input type="checkbox" id="includeGeneralsInPrint" class="notes-checkbox" title="Check to print Generals" checked onclick="event.stopPropagation()">
-                                        <label for="includeGeneralsInPrint" class="notes-label" onclick="event.stopPropagation()"> Homeopathic Approach</label>
+                                        <label for="includeGeneralsInPrint" class="notes-label" onclick="event.stopPropagation()">Patient Generals</label>
                                     </div>
                                     <span id="generalsToggleIcon" style="font-weight:bold; color:var(--primary); font-size:1.2em;">▼</span>
                                 </div>
@@ -950,7 +950,7 @@
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                                     <div class="notes-header" style="margin:0;">
                                         <input type="checkbox" id="includeExamInPrint" class="notes-checkbox" title="Check to print Exam" checked>
-                                        <label for="includeExamInPrint" class="notes-label">Investigation</label>
+                                        <label for="includeExamInPrint" class="notes-label">On Examination</label>
                                     </div>
                                     <div class="template-area" id="examTemplateChipContainer">
                                         <span class="template-add-btn" onclick="window.openExamTemplateManager()">+ Manage Templates</span>
@@ -1011,7 +1011,7 @@
                 <p style="font-size: 18px; font-weight: bold; color: #000; margin: 5px 0 0 0;">B.H.M.S., PGDCP</p>
             </div>
 
-            <div class="rx-badge" id="recordBadge"><span>PATIENT PERSONAL RECORDS</span></div>
+            <div class="rx-badge" id="recordBadge"><span>PATIENT Details</span></div>
             
             <div class="print-meta-grid">
                 <div id="printNameAll"></div>
@@ -3161,74 +3161,126 @@
             }
         };
 
-        function renderTemplateChips() {
-            const container = document.getElementById('templateChipContainer'); const manageBtn = container.querySelector('.template-add-btn'); container.innerHTML = '';
-            clinicalTemplates.forEach(t => { const chip = document.createElement('span'); chip.className = 'template-chip'; chip.innerText = t.name; chip.onclick = () => startTemplateFlow(t); container.appendChild(chip); }); container.appendChild(manageBtn);
-        }
+        window.renderTemplateChips = function() {
+            const container = document.getElementById('templateChipContainer'); 
+            if(!container) return;
+            const manageBtn = container.querySelector('.template-add-btn'); 
+            container.innerHTML = '';
+            clinicalTemplates.forEach(t => { 
+                const chip = document.createElement('span'); 
+                chip.className = 'template-chip'; 
+                chip.innerText = t.name; 
+                chip.onclick = () => window.startTemplateFlow(t); 
+                container.appendChild(chip); 
+            }); 
+            if(manageBtn) container.appendChild(manageBtn);
+        };
         
-        function startTemplateFlow(t) {
+        window.startTemplateFlow = function(t) {
             currentTemplateAction = { template: t };
             const sub = (t.subtypes || []).map(s => s ? s.trim() : '').filter(s => s !== '');
             const dur = (t.durations || []).map(d => d ? d.trim() : '').filter(d => d !== '');
             
             if(sub.length > 0) {
-                openSelectionModal(`Type of ${t.name}`, sub, (s) => { 
+                window.openSelectionModal(`Type of ${t.name}`, sub, (s) => { 
                     currentTemplateAction.subtype = s; 
                     if(dur.length > 0) {
                         const durOptions = [...dur, "✎ Manual Input"];
-                        openSelectionModal(`Duration`, durOptions, (d) => {
+                        window.openSelectionModal(`Duration`, durOptions, (d) => {
                             if (d === "✎ Manual Input") {
-                                document.getElementById('manualDurationInput').value = ''; document.getElementById('manualDurationModal').style.display = 'flex'; document.getElementById('manualDurationInput').focus();
-                            } else { currentTemplateAction.duration = d; finalizeTemplate(); }
+                                document.getElementById('manualDurationInput').value = '';
+                                document.getElementById('manualDurationModal').style.display = 'flex';
+                                document.getElementById('manualDurationInput').focus();
+                            } else {
+                                currentTemplateAction.duration = d; 
+                                window.finalizeTemplate();
+                            }
                         }); 
-                    } else finalizeTemplate(); 
+                    } else window.finalizeTemplate(); 
                 });
-            } else finalizeTemplate();
-        }
+            } else window.finalizeTemplate();
+        };
 
         window.saveManualDuration = () => {
             const val = document.getElementById('manualDurationInput').value.trim();
             if(!val) return showToast("Please enter a duration", "error");
-            currentTemplateAction.duration = val; closeModal('manualDurationModal'); finalizeTemplate();
-        }
+            currentTemplateAction.duration = val;
+            window.closeModal('manualDurationModal');
+            window.finalizeTemplate();
+        };
 
-        function finalizeTemplate() {
+        window.finalizeTemplate = function() {
             const t = currentTemplateAction; let txt = `• Patient has ${t.template.name}`;
             if(t.subtype) txt += ` (${t.subtype})`; if(t.duration) txt += ` for ${t.duration}`; txt += ".";
             const area = document.getElementById('docDetails'); 
-            const cursorStart = area.selectionStart; const cursorEnd = area.selectionEnd;
-            const textBefore = area.value.substring(0, cursorStart); const textAfter = area.value.substring(cursorEnd, area.value.length);
+            
+            const cursorStart = area.selectionStart;
+            const cursorEnd = area.selectionEnd;
+            const textBefore = area.value.substring(0, cursorStart);
+            const textAfter = area.value.substring(cursorEnd, area.value.length);
+            
             area.value = textBefore + (textBefore && !textBefore.endsWith('\n') ? "\n" : "") + txt + textAfter;
             area.style.height = 'auto'; area.style.height = (area.scrollHeight) + 'px'; 
-            closeModal('selectionModal');
-        }
+            window.closeModal('selectionModal');
+        };
 
-        function renderDiagTemplateChips() {
-            const container = document.getElementById('diagTemplateChipContainer'); const manageBtn = container.querySelector('.template-add-btn'); container.innerHTML = '';
-            diagTemplates.forEach(t => { const chip = document.createElement('span'); chip.className = 'template-chip'; chip.innerText = t.name; chip.onclick = () => startDiagTemplateFlow(t); container.appendChild(chip); }); container.appendChild(manageBtn);
-        }
+        window.renderDiagTemplateChips = function() {
+            const container = document.getElementById('diagTemplateChipContainer'); 
+            if(!container) return;
+            const manageBtn = container.querySelector('.template-add-btn'); 
+            container.innerHTML = '';
+            diagTemplates.forEach(t => { 
+                const chip = document.createElement('span'); 
+                chip.className = 'template-chip'; 
+                chip.innerText = t.name; 
+                chip.onclick = () => window.startDiagTemplateFlow(t); 
+                container.appendChild(chip); 
+            }); 
+            if(manageBtn) container.appendChild(manageBtn);
+        };
         
-        function startDiagTemplateFlow(t) {
+        window.startDiagTemplateFlow = function(t) {
             const sub = (t.subtypes || []).map(s => s ? s.trim() : '').filter(s => s !== '');
-            if(sub.length > 0) { openSelectionModal(`Select ${t.name} Type`, sub, (s) => { finalizeDiagTemplate(t.name + " (" + s + ")"); });
-            } else { finalizeDiagTemplate(t.name); }
-        }
+            if(sub.length > 0) {
+                window.openSelectionModal(`Select ${t.name} Type`, sub, (s) => { window.finalizeDiagTemplate(t.name + " (" + s + ")"); });
+            } else {
+                window.finalizeDiagTemplate(t.name);
+            }
+        };
         
-        function finalizeDiagTemplate(text) {
-            const area = document.getElementById('provDiagnosis'); let currentText = area.value.trim();
-            if (currentText) { if (currentText.endsWith(',')) { area.value = currentText + ' ' + text; } else { area.value = currentText + ', ' + text; }
-            } else { area.value = text; }
+        window.finalizeDiagTemplate = function(text) {
+            const area = document.getElementById('provDiagnosis');
+            let currentText = area.value.trim();
+            
+            if (currentText) {
+                if (currentText.endsWith(',')) {
+                    area.value = currentText + ' ' + text;
+                } else {
+                    area.value = currentText + ', ' + text;
+                }
+            } else {
+                area.value = text;
+            }
+            
             area.style.height = 'auto'; area.style.height = (area.scrollHeight) + 'px'; 
-            closeModal('selectionModal');
-        }
+            window.closeModal('selectionModal');
+        };
 
-        function openSelectionModal(title, opts, cb) {
-            document.getElementById('selectionTitle').innerText = title; const grid = document.getElementById('selectionContainer'); grid.innerHTML = '';
-            opts.forEach(o => { const btn = document.createElement('div'); btn.className = 'selection-btn'; btn.innerText = o; btn.onclick = () => cb(o); grid.appendChild(btn); });
+        window.openSelectionModal = function(title, opts, cb) {
+            document.getElementById('selectionTitle').innerText = title; 
+            const grid = document.getElementById('selectionContainer'); 
+            grid.innerHTML = '';
+            opts.forEach(o => { 
+                const btn = document.createElement('div'); 
+                btn.className = 'selection-btn'; 
+                btn.innerText = o; 
+                btn.onclick = () => cb(o); 
+                grid.appendChild(btn); 
+            });
             document.getElementById('selectionModal').style.display = 'flex';
-        }
+        };
         
-        window.openTemplateManager = () => { resetTemplateForm(); document.getElementById('templateManagerModal').style.display = 'flex'; };
+        window.openTemplateManager = () => { window.resetTemplateForm(); document.getElementById('templateManagerModal').style.display = 'flex'; };
         
         window.saveNewTemplate = async () => {
             const id = document.getElementById('tplEditId').value;
@@ -3237,27 +3289,32 @@
             const durs = document.getElementById('tplDurations').value.split(',').map(s=>s.trim()).filter(s=>s);
             if(!name) return; 
 
-            if(id) await updateDoc(doc(db, "clinicalTemplates", id), { name, subtypes: subs, durations: durs });
-            else await addDoc(collection(db, "clinicalTemplates"), { name, subtypes: subs, durations: durs });
-            resetTemplateForm();
+            if(id) {
+                await updateDoc(doc(db, "clinicalTemplates", id), { name, subtypes: subs, durations: durs });
+            } else {
+                await addDoc(collection(db, "clinicalTemplates"), { name, subtypes: subs, durations: durs });
+            }
+            window.resetTemplateForm();
         };
 
-        window.deleteTemplate = async (id) => { if(confirm("Delete?")) await deleteDoc(doc(db, "clinicalTemplates", id)); };
+        window.deleteTemplate = async (id) => { if(confirm("Delete this template?")) await deleteDoc(doc(db, "clinicalTemplates", id)); };
         
-        function renderTemplateManagerList() { 
-            const div = document.getElementById('templateListContainer'); div.innerHTML=''; 
+        window.renderTemplateManagerList = function() { 
+            const div = document.getElementById('templateListContainer'); 
+            if(!div) return;
+            div.innerHTML=''; 
             clinicalTemplates.forEach(t=>{ 
                 div.innerHTML+=`<div style="display:flex;justify-content:space-between;padding:8px 5px; border-bottom:1px solid #eee; align-items:center;">
                     <span style="font-weight:bold;">${t.name}</span>
                     <div style="display:flex; gap:5px;">
-                        <button class="btn btn-secondary btn-sm" onclick="editTemplate('${t.id}', 'clinical')">Edit</button>
-                        <button class="btn btn-red btn-sm" onclick="deleteTemplate('${t.id}')">Del</button>
+                        <button class="btn btn-secondary btn-sm" onclick="window.editTemplate('${t.id}', 'clinical')">Edit</button>
+                        <button class="btn btn-red btn-sm" onclick="window.deleteTemplate('${t.id}')">Del</button>
                     </div>
                 </div>`; 
             }); 
-        }
+        };
 
-        window.openDiagTemplateManager = () => { resetDiagTemplateForm(); document.getElementById('diagTemplateManagerModal').style.display = 'flex'; };
+        window.openDiagTemplateManager = () => { window.resetDiagTemplateForm(); document.getElementById('diagTemplateManagerModal').style.display = 'flex'; };
         
         window.saveNewDiagTemplate = async () => {
             const id = document.getElementById('diagTplEditId').value;
@@ -3265,11 +3322,30 @@
             const subs = document.getElementById('diagTplTypes').value.split(',').map(s=>s.trim()).filter(s=>s);
             if(!name) return; 
 
-            if (id) await updateDoc(doc(db, "diagnosisTemplates", id), { name, subtypes: subs });
-            else await addDoc(collection(db, "diagnosisTemplates"), { name, subtypes: subs });
-            resetDiagTemplateForm();
+            if (id) {
+                await updateDoc(doc(db, "diagnosisTemplates", id), { name, subtypes: subs });
+            } else {
+                await addDoc(collection(db, "diagnosisTemplates"), { name, subtypes: subs });
+            }
+            window.resetDiagTemplateForm();
         };
 
+        window.deleteDiagTemplate = async (id) => { if(confirm("Delete this Diagnosis template?")) await deleteDoc(doc(db, "diagnosisTemplates", id)); };
+        
+        window.renderDiagTemplateManagerList = function() { 
+            const div = document.getElementById('diagTemplateListContainer'); 
+            if(!div) return;
+            div.innerHTML=''; 
+            diagTemplates.forEach(t=>{ 
+                div.innerHTML+=`<div style="display:flex;justify-content:space-between;padding:8px 5px; border-bottom:1px solid #eee; align-items:center;">
+                    <span style="font-weight:bold;">${t.name}</span>
+                    <div style="display:flex; gap:5px;">
+                        <button class="btn btn-secondary btn-sm" onclick="window.editTemplate('${t.id}', 'diag')">Edit</button>
+                        <button class="btn btn-red btn-sm" onclick="window.deleteDiagTemplate('${t.id}')">Del</button>
+                    </div>
+                </div>`; 
+            }); 
+        };
         window.deleteDiagTemplate = async (id) => { if(confirm("Delete?")) await deleteDoc(doc(db, "diagnosisTemplates", id)); };
         
         function renderDiagTemplateManagerList() { 
