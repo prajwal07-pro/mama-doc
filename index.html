@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neuro Specialities - Cloud System</title>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Detect if the User-Agent matches any known mobile operating systems
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                document.body.classList.add('mobile-layout');
+                console.log("Mobile Device Detected: Applying Mobile Layout");
+            } else {
+                document.body.classList.add('desktop-layout');
+            }
+        });
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <script src="medicines.js"></script>
@@ -204,6 +219,48 @@
         .selection-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
         .selection-btn { padding: 10px; border: 1px solid #e5e7eb; border-radius: 8px; background: white; cursor: pointer; font-size: 0.9em; text-align: center; transition: 0.2s; color: #374151; }
         .selection-btn:hover { border-color: var(--primary); background: #f0f9ff; color: var(--primary); }
+
+        /* --- DEDICATED MOBILE LAYOUT (USER-AGENT TRIGGERED) --- */
+        body.mobile-layout { padding: 10px; }
+        body.mobile-layout .app-header { padding: 15px 10px; }
+        
+        /* Stack Header Info */
+        body.mobile-layout .header-left, 
+        body.mobile-layout .header-right { flex-direction: column; text-align: center; gap: 10px; }
+        body.mobile-layout .header-right div { align-items: center !important; text-align: center !important; }
+        body.mobile-layout .app-header > div:first-child { flex-direction: column; gap: 20px; }
+        
+        /* Horizontally Scrollable App Navigation */
+        body.mobile-layout .nav-pills { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 5px; width: 100%; -webkit-overflow-scrolling: touch; }
+        body.mobile-layout .nav-btn { white-space: nowrap; }
+        
+        /* Stack All Grids into Single Columns */
+        body.mobile-layout .grid-reception, 
+        body.mobile-layout .grid-doctor, 
+        body.mobile-layout .grid-2, 
+        body.mobile-layout .grid-3, 
+        body.mobile-layout .grid-3-reception { grid-template-columns: 1fr; gap: 15px; }
+        
+        /* Limit Queue Height so it doesn't take up the whole screen */
+        body.mobile-layout .patient-list-section { height: 250px; position: relative; top: 0; margin-bottom: 20px; }
+        
+        /* Redesign Prescription Rows for Mobile Screens */
+        body.mobile-layout .drug-row { flex-wrap: wrap; padding: 15px 10px; gap: 15px; }
+        body.mobile-layout .col-name, 
+        body.mobile-layout .col-weight,
+        body.mobile-layout .col-days,
+        body.mobile-layout .col-total { flex: 0 0 100%; width: 100%; }
+        body.mobile-layout .col-m, 
+        body.mobile-layout .col-a, 
+        body.mobile-layout .col-n { flex: 1; }
+        body.mobile-layout .col-action { flex: 0 0 100%; text-align: center; padding-top: 5px; border-top: 1px dashed var(--border); margin-top: 5px; }
+        body.mobile-layout .col-action button { width: 100%; padding: 10px; }
+        
+        /* Float the Auto-Mic Switch inline */
+        body.mobile-layout .auto-mic-fixed { position: static; margin-bottom: 15px; width: 100%; justify-content: space-between; box-shadow: none; border: 2px solid var(--primary); border-radius: 8px; }
+        body.mobile-layout #workspace > .card > div:first-child { flex-direction: column; gap: 15px; align-items: flex-start; }
+        body.mobile-layout #workspace > .card > div:first-child > div:last-child { margin-right: 0; width: 100%; justify-content: space-between; }
+        /* ------------------------------------------------------ */
 
         @media print {
             body, .container { background: white; margin: 0; padding: 0; max-width: 100%; font-size: 14px; }
