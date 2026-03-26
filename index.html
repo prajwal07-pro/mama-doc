@@ -1475,7 +1475,7 @@
         window.openSettingsModal = () => {
             const settings = JSON.parse(localStorage.getItem('neuroSettings')) || defaultSettings;
             document.getElementById('setPageSize').value = settings.pageSize || 'A4';
-            ['printHeaderFormat','bp','pulse','hb','rbs','creatinine','ecg','eeg','ncv','doppler','ctmri','oldreports','medName','medStr','medM','medA','medN','medDur', 'showName', 'showRegNo', 'showAgeSex', 'showDate'].forEach(f => {
+            ['printHeaderFormat','medName','medStr','medM','medA','medN','medDur', 'showName', 'showRegNo', 'showAgeSex', 'showDate'].forEach(f => {
                 const el = document.getElementById(`set-${f}`);
                 if(el) el.value = settings[f] || defaultSettings[f] || '';
             });
@@ -1497,7 +1497,6 @@
                 showQueueCheckboxes: document.getElementById('set-showQueueCheckboxes').value,
                 pageSize: document.getElementById('setPageSize').value,
                 printHeaderFormat: document.getElementById('set-printHeaderFormat').value,
-                bp: document.getElementById('set-bp').value,
                 medName: document.getElementById('set-medName').value,
                 medStr: document.getElementById('set-medStr').value,
                 medM: document.getElementById('set-medM').value,
@@ -1511,7 +1510,7 @@
             };
             localStorage.setItem('neuroSettings', JSON.stringify(settings));
             applySettings();
-            closeModal('settingsModal');
+            window.closeModal('settingsModal');
             showToast("Settings Saved!", "success");
         };
 
